@@ -49,6 +49,32 @@ Successful run
 
 ## Phase 2 - Integrating SAST and SCA Scanning
 
+```yaml'
+sast-scan:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run Semgrep SAST Scan
+      uses: returntocorp/semgrep-action@v1
+
+sca-scan:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run OWASP Dependency-Check
+      uses: dependency-check/Dependency-Check_Action@main
+      with:
+        project: "juice-shop"
+        path: "."
+        format: "HTML"
+        out: "reports"
+        args: "--disableYarnAudit"
+```
+
 Report: Analyze the new content of the ci.yml and describe the work performed by each
 of the jobs. How do GitHub actions know where to find what is defined in “uses”
 clauses? Select two of the clauses and explain them.
