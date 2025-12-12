@@ -2,7 +2,7 @@ name: CI Pipeline
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -44,3 +44,10 @@ jobs:
           format: "HTML"
           out: "reports"
           args: "--disableYarnAudit"
+
+      - name: Upload Dependency-Check report
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-check-report
+          path: reports/dependency-check-report.html
+
