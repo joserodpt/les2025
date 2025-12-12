@@ -118,20 +118,8 @@ Report: Explain, in your own words, why this error is occurring and identify the
 threat. Why is this threat dangerous? Provide evidence that you located the threat. Why does the
 build workflow continue and finish despite these errors?
 
-The error points to a path traversal vulnerability in one of the dependencies of the project. The file
-`../../ftp/legal.md` indicates that during the extraction of an archive it is attempting to write a file outside of the intended directory.
-This threat is dangerous because it can allow an attacker to overwrite critical files on the system, potentially leading to unauthorized access or system compromise.
-
-To view the report, it is needed to add a new action (below), because by default the report is generated inside the runner but it's not accessible directly from the workflow logs.
-```
-- name: Upload Dependency-Check report
-  uses: actions/upload-artifact@v3
-  with:
-    name: dependency-check-report
-    path: reports/dependency-check-report.html
-```
-
-And inside that report, the evidence of the vulnerability can be found:
+The error points to a path traversal vulnerability in one of the dependencies of the project. The zip contains a file (`../../ftp/legal.md`) with a path that includes `../..`, which allows it to escape the intended extraction directory.
+This threat is dangerous because it can allow an attacker to deploy files outside of the intended directory, potentially bypassing security checks without proper validation.
 
 ## Phase 3 - Container Image Security Scanning
 
