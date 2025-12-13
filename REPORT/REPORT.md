@@ -127,6 +127,9 @@ Then, Trivy is used to scan the image for vulnerabilities.
 
 The final output of the pipeline is a security assessment of the project, including container image vulnerabilities checking, SAST findings, and SCA vulnerabilities.
 
+![Successful run](phase3.png)
+Summary table of vulnerabilities found by Trivy.
+
 ## Phase 4 - Implementing Security Gates and Breaking the Build
 
 Report: Analyze the new content of the ci.yml and describe the work performed by each of the
