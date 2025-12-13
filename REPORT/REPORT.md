@@ -114,10 +114,6 @@ The errors come from the SCA scan that found vulnerabilities, so it failed.
 
 ### 3. “Error: Archive contains a file (../../ftp/legal.md) that would be extracted outside of the target directory.”
 
-Report: Explain, in your own words, why this error is occurring and identify the source of the
-threat. Why is this threat dangerous? Provide evidence that you located the threat. Why does the
-build workflow continue and finish despite these errors?
-
 The error points to a path traversal vulnerability in one of the dependencies of the project. The zip contains a file (`../../ftp/legal.md`) with a path that includes `../..`, which allows it to escape the intended extraction directory.
 This threat is dangerous because it can allow an attacker to deploy files outside of the intended directory, potentially bypassing security checks without proper validation.
 
