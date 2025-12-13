@@ -119,9 +119,13 @@ This threat is dangerous because it can allow an attacker to deploy files outsid
 
 ## Phase 3 - Container Image Security Scanning
 
-Report: Analyze the new content of the ci.yml and describe the work performed by each of the
-jobs. What is the final output of the workflow deployed in the pipeline? Explain and justify the
-results you obtained in a clear way, providing evidence for why you got that outcome.
+On the build job, the docker image is built and tagged as `juice-shop-image:latest`. and exported to /tmp/juice-shop-image.tar.
+Then, the image is uploaded as an artifact to be used in the container-scan job.
+
+On the container-scan job, the image is downloaded from the artifact and loaded into the container runtime.
+Then, Trivy is used to scan the image for vulnerabilities.
+
+The final output of the pipeline is a security assessment of the project, including container image vulnerabilities checking, SAST findings, and SCA vulnerabilities.
 
 ## Phase 4 - Implementing Security Gates and Breaking the Build
 

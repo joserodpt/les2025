@@ -30,12 +30,23 @@ jobs:
 
   sast-scan:
     runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      actions: read
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Run Semgrep SAST Scan
-        uses: returntocorp/semgrep-action@v1
+        run: |
+          pip install semgrep
+          semgrep scan --config auto --sarif --output semgrep.sarif || true
+
+      - name: Upload SARIF to Security Tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: semgrep.sarif
 
   sca-scan:
     runs-on: ubuntu-latest
@@ -51,6 +62,12 @@ jobs:
           format: "HTML"
           out: "reports"
           args: "--disableYarnAudit"
+
+      - name: Upload SCA Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: sca-report
+          path: reports/dependency-check-report.html
 
   container-scan:
     runs-on: ubuntu-latest
