@@ -134,7 +134,7 @@ Summary table of vulnerabilities found by Trivy.
 
 Report: Analyze the new content of the ci.yml and describe the work performed by each of the
 jobs. What is the final output of the workflow deployed in the pipeline? Explain and justify the
-results you obtained in a clear way, providing evidence for why you got that outcome.
+results you obtained in a clear way, providing evidence for why you got that outcome
 
 Report: For each of the gates previously discussed, describe and analyze their output in a
 pragmatic way, giving your personal thoughts of the outcome obtained.
